@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="Ngangi.App.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:t="clr-namespace:Ngangi.App"
+       xmlns:views="clr-namespace:Ngangi.App.Views"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarIsVisible="False"
+       Shell.BackgroundColor="{AppThemeBinding Light={StaticResource Bg}, Dark={StaticResource BgD}}">
+
+    <!-- Étape 4 : la barre native de Shell est masquée (Shell.TabBarIsVisible="False") ; la barre du bas est dessinée par
+         Controls/BottomBar (icônes + libellés + indicateur de l'onglet choisi) via le modèle « MainTabTemplate ». -->
+
+    <!-- Hors de la barre du bas : Connexion (page de départ) -->
+    <ShellContent Route="login" ContentTemplate="{DataTemplate views:LoginPage}" />
+
+    <!-- Les cinq pages principales : Accueil, Membres, Cotisations, Prêts, Bilan -->
+    <TabBar Route="main">
+        <ShellContent Title="{x:Static t:AppTexts.TabHome}" Route="dashboard" ContentTemplate="{DataTemplate views:DashboardPage}" />
+        <ShellContent Title="{x:Static t:AppTexts.TabMembers}" Route="members" ContentTemplate="{DataTemplate views:MembersPage}" />
+        <ShellContent Title="{x:Static t:AppTexts.TabContributions}" Route="contributions" ContentTemplate="{DataTemplate views:ContributionsPage}" />
+        <ShellContent Title="{x:Static t:AppTexts.TabLoans}" Route="loans" ContentTemplate="{DataTemplate views:LoansPage}" />
+        <ShellContent Title="{x:Static t:AppTexts.TabReport}" Route="report" ContentTemplate="{DataTemplate views:ReportPage}" />
+    </TabBar>
+</Shell>

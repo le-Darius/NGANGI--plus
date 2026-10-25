@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.BackupPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             Title="Sauvegarde" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+            <Button Text="Retour" Clicked="OnBackClicked" HorizontalOptions="Start" />
+            <Label Text="Sauvegarde et restauration" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="La sauvegarde .ngangi est chiffrée par un mot de passe choisi par vous. Conservez ce mot de passe : il ne peut pas être récupéré." Style="{StaticResource Caption}" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Créer une sauvegarde" Style="{StaticResource Sub}" />
+                    <Entry x:Name="BackupPassword" Placeholder="Mot de passe (8 caractères minimum)" IsPassword="True" />
+                    <Entry x:Name="BackupPasswordConfirm" Placeholder="Confirmer le mot de passe" IsPassword="True" />
+                    <Button Text="Chiffrer et partager" Clicked="OnBackupClicked" />
+                </VerticalStackLayout>
+            </Border>
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Restaurer une sauvegarde" Style="{StaticResource Sub}" />
+                    <Label Text="Un aperçu sera présenté avant le remplacement. Une copie chiffrée des données actuelles sera conservée automatiquement." Style="{StaticResource Caption}" />
+                    <Button Text="Choisir un fichier .ngangi" Clicked="OnRestoreClicked" />
+                </VerticalStackLayout>
+            </Border>
+            <Label Text="Les données restent sur cet appareil, sauf si vous choisissez vous-même une application de partage." Style="{StaticResource Caption}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--
+      Palette Ngangi+ issue du logo : bleu pétrole profond (anneau), cyan (rubans), cuivre (arc), marine (texte).
+      Mode clair (suffixe vide) et mode sombre (suffixe D).
+      Seule source des couleurs avec Palette.cs (valeurs identiques ; vérifier avec tools/verify_palette.py).
+      Contrastes : voir tools/contrast.py et tools/verify_palette.py (AA : 4,5:1 texte, 3:1 composants).
+    -->
+    <Color x:Key="Clear">#00000000</Color>
+    <Color x:Key="Bg">#F3F8FA</Color>
+    <Color x:Key="Card">#FFFFFF</Color>
+    <Color x:Key="Line">#D3E0E7</Color>
+    <Color x:Key="InputLine">#6B8797</Color>
+    <Color x:Key="Pri">#0A5C7D</Color>
+    <Color x:Key="OnPri">#FFFFFF</Color>
+    <Color x:Key="Tint">#E0EFF5</Color>
+    <Color x:Key="OkText">#0A5C7D</Color>
+    <Color x:Key="Accent">#8F4F1E</Color>
+    <Color x:Key="Hero">#0B4A66</Color>
+    <Color x:Key="OnHero">#FFFFFF</Color>
+    <Color x:Key="HeroTile">#1A6384</Color>
+    <Color x:Key="Text">#0F2A3B</Color>
+    <Color x:Key="Muted">#4A6071</Color>
+    <Color x:Key="WarnBg">#FBEBDB</Color>
+    <Color x:Key="WarnLine">#D9A06A</Color>
+    <Color x:Key="WarnText">#6A3A12</Color>
+    <Color x:Key="Bad">#B3261E</Color>
+    <Color x:Key="BadBg">#FBE3E0</Color>
+    <Color x:Key="DisBg">#DAE3E8</Color>
+    <Color x:Key="DisText">#6F8190</Color>
+    <Color x:Key="PressedPri">#073F57</Color>
+    <!-- Logo : anneau, ruban, arc cuivre. Utilisés par les SVG (générés par tools/generate_brand_assets.py) -->
+    <Color x:Key="LogoRing">#0A5C7D</Color>
+    <Color x:Key="LogoRibbon">#2A93B8</Color>
+    <Color x:Key="LogoCopper">#B06A32</Color>
+
+    <Color x:Key="BgD">#0A1822</Color>
+    <Color x:Key="CardD">#112633</Color>
+    <Color x:Key="LineD">#223D4D</Color>
+    <Color x:Key="InputLineD">#5E8296</Color>
+    <Color x:Key="PriD">#5BC0E0</Color>
+    <Color x:Key="OnPriD">#03212E</Color>
+    <Color x:Key="TintD">#153446</Color>
+    <Color x:Key="OkTextD">#7FD0EC</Color>
+    <Color x:Key="AccentD">#E3A877</Color>
+    <Color x:Key="HeroD">#0F4560</Color>
+    <Color x:Key="OnHeroD">#EAF4F9</Color>
+    <Color x:Key="HeroTileD">#1A5A78</Color>
+    <Color x:Key="TextD">#E9F2F7</Color>
+    <Color x:Key="MutedD">#9DB4C2</Color>
+    <Color x:Key="WarnBgD">#2E2113</Color>
+    <Color x:Key="WarnLineD">#7D5A33</Color>
+    <Color x:Key="WarnTextD">#F2CFA6</Color>
+    <Color x:Key="BadD">#F0806F</Color>
+    <Color x:Key="BadBgD">#3A1D19</Color>
+    <Color x:Key="DisBgD">#1C3342</Color>
+    <Color x:Key="DisTextD">#7893A4</Color>
+    <Color x:Key="PressedPriD">#8AD3EC</Color>
+    <Color x:Key="LogoRingD">#8AD3EC</Color>
+    <Color x:Key="LogoRibbonD">#4FB3D6</Color>
+    <Color x:Key="LogoCopperD">#E3A877</Color>
+</ResourceDictionary>

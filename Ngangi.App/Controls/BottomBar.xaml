@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Barre de navigation du bas (remplace la barre native de Shell, masquée dans AppShell.xaml).
+     Posée sur les cinq pages principales par le ControlTemplate « MainTabTemplate » (Templates.xaml). -->
+<ContentView x:Class="Ngangi.App.Controls.BottomBar"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls">
+    <!-- SafeAreaEdges : seul le bas est protégé (barre de gestes / 3 boutons). Le fond de la barre remplit cette marge. -->
+    <Grid RowDefinitions="1,Auto" RowSpacing="0" SafeAreaEdges="None, None, None, Container"
+          BackgroundColor="{AppThemeBinding Light={StaticResource Card}, Dark={StaticResource CardD}}">
+        <BoxView Grid.Row="0" Color="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineD}}" />
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="0">
+            <c:NavTab x:Name="TabHome" Grid.Column="0" Kind="Home" Route="dashboard" Text="{x:Static t:AppTexts.TabHome}" />
+            <c:NavTab x:Name="TabMembers" Grid.Column="1" Kind="Members" Route="members" Text="{x:Static t:AppTexts.TabMembers}" />
+            <c:NavTab x:Name="TabContributions" Grid.Column="2" Kind="Contributions" Route="contributions" Text="{x:Static t:AppTexts.TabContributions}" />
+            <c:NavTab x:Name="TabLoans" Grid.Column="3" Kind="Loans" Route="loans" Text="{x:Static t:AppTexts.TabLoans}" />
+            <c:NavTab x:Name="TabReport" Grid.Column="4" Kind="Report" Route="report" Text="{x:Static t:AppTexts.TabReport}" />
+        </Grid>
+    </Grid>
+</ContentView>

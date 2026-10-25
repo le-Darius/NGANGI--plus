@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Logo Ngangi+ vectoriel (SVG) : variante claire ou sombre selon le thème. Réutilisable partout :
+     <c:BrandLogo Size="32" /> avec xmlns:c="clr-namespace:Ngangi.App.Controls". -->
+<ContentView x:Class="Ngangi.App.Controls.BrandLogo"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App">
+    <Image x:Name="Img"
+           Source="{AppThemeBinding Light=logo_ngangi.svg, Dark=logo_ngangi_dark.svg}"
+           Aspect="AspectFit"
+           SemanticProperties.Description="{x:Static t:AppTexts.LogoDescription}" />
+</ContentView>

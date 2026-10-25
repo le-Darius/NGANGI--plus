@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:c="clr-namespace:Ngangi.App.Controls">
+
+    <!-- Ligne de liste générique : avatar, titre, détail, montant, badge, boutons d'action -->
+    <DataTemplate x:Key="RowTemplate">
+        <Border Style="{StaticResource Card}" Padding="14,12">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Tap}" />
+            </Border.GestureRecognizers>
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                    <Border Grid.Column="0" Style="{StaticResource Avatar}" IsVisible="{Binding HasInitials}">
+                        <Label Text="{Binding Initials}" Style="{StaticResource AvatarLabel}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="{Binding Title}" Style="{StaticResource Name}" />
+                        <Label Text="{Binding Detail}" Style="{StaticResource Caption}" IsVisible="{Binding HasDetail}" />
+                    </VerticalStackLayout>
+                    <HorizontalStackLayout Grid.Column="2" Spacing="8" VerticalOptions="Center">
+                        <Label Text="{Binding Trailing}" Style="{StaticResource Name}" IsVisible="{Binding HasTrailing}" />
+                        <Border Style="{StaticResource Badge}" BackgroundColor="{Binding BadgeBg}" IsVisible="{Binding HasBadge}">
+                            <Label Text="{Binding BadgeText}" Style="{StaticResource BadgeText}" TextColor="{Binding BadgeFg}" />
+                        </Border>
+                    </HorizontalStackLayout>
+                </Grid>
+                <HorizontalStackLayout Spacing="8" IsVisible="{Binding HasActions}">
+                    <Button Text="{Binding PrimaryText}" Command="{Binding PrimaryCommand}" Style="{StaticResource SmallButton}" IsVisible="{Binding HasPrimary}" />
+                    <Button Text="{Binding SecondaryText}" Command="{Binding SecondaryCommand}" Style="{StaticResource SmallOutlineButton}" IsVisible="{Binding HasSecondary}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </DataTemplate>
+
+    <!-- Bouton de durée du prêt -->
+    <DataTemplate x:Key="ChipTemplate">
+        <Button Text="{Binding Label}" BackgroundColor="{Binding Bg}" TextColor="{Binding Fg}"
+                Command="{Binding Command}" CornerRadius="22" HeightRequest="44" Padding="16,0"
+                FontSize="{StaticResource FontBody}" FontAttributes="Bold" Margin="0,0,8,8" />
+    </DataTemplate>
+
+    <!-- Les cinq pages principales (Accueil, Membres, Cotisations, Prêts, Bilan) : leur contenu + la barre du bas.
+         .NET 10 : la page est bord à bord (Android 15). SafeAreaEdges va dans l'ordre gauche, haut, droite, bas :
+         ici le contenu évite la barre d'état et les côtés ; le bas est laissé à la barre (BottomBar), dont le fond
+         passe sous la barre de gestes ou les 3 boutons de navigation et dont les onglets restent au-dessus. -->
+    <ControlTemplate x:Key="MainTabTemplate">
+        <Grid RowDefinitions="*,Auto" RowSpacing="0" SafeAreaEdges="Container, Container, Container, None">
+            <ContentPresenter Grid.Row="0" />
+            <c:BottomBar Grid.Row="1" />
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

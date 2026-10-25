@@ -1,0 +1,15 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.keystore
+*.jks
+*.pfx
+*.p12
+keystore.properties
+.env
+*.ngangi
+ngangi-data.json
+*.bak
+*.corrupt

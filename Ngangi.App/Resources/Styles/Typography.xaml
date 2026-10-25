@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--
+      Typographie Ngangi+ : police système (aucun fichier de police embarqué = application plus légère),
+      deux graisses seulement (normale et gras). Tailles MAUI adaptatives : les contrôles natifs suivent la préférence de taille du système.
+      Les mises en page doivent autoriser le retour à la ligne et le défilement vertical. Jamais moins de 12.
+        Titre      24 (interligne 28)   Sous-titre 18   Corps 16   Légende 13
+      Toute taille de texte dans l'application vient d'ici ; aucun FontSize chiffré dans les pages.
+    -->
+    <x:Double x:Key="FontTitle">24</x:Double>
+    <x:Double x:Key="FontSubtitle">18</x:Double>
+    <x:Double x:Key="FontBody">16</x:Double>
+    <x:Double x:Key="FontCaption">13</x:Double>
+
+    <!-- Interligne 28 pour un titre de 24 : MAUI attend un multiple de la taille (28 / 24) -->
+    <x:Double x:Key="LineHeightTitle">1.1667</x:Double>
+</ResourceDictionary>

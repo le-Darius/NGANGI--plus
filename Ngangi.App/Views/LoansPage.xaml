@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.LoansPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             ControlTemplate="{StaticResource MainTabTemplate}"
+             Title="Prêts" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,24,16,24" Spacing="14">
+            <Label Text="Prêts" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+            <Button Text="Demander un prêt" Command="{Binding RequestCommand}" Style="{StaticResource PrimaryButton}" AutomationId="Loans-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+            <CollectionView ItemsSource="{Binding Loans}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList" />
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoLoans}">
+                <VerticalStackLayout Spacing="6" Padding="0,12">
+                    <Label Text="{x:Static t:AppTexts.NoLoanTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{x:Static t:AppTexts.NoLoanBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

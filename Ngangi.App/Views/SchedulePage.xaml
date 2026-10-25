@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.SchedulePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             Title="Échéancier" SafeAreaEdges="All">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="16,8,16,16" Spacing="14">
+                <c:IconButton Kind="Back" Command="{Binding BackCommand}" Description="{x:Static t:AppTexts.Back}" />
+                <Label Text="Échéancier" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+
+                <Border Style="{StaticResource Card}" IsVisible="{Binding HasLoan}">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="{Binding Borrower}" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+                        <Label Text="{Binding Summary}" Style="{StaticResource Caption}" />
+                        <ProgressBar Progress="{Binding Progress}" />
+                        <Label Text="{Binding ProgressText}" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <CollectionView ItemsSource="{Binding Installments}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList" />
+
+                <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoLoan}">
+                    <VerticalStackLayout Spacing="4" Padding="0,8">
+                        <Label Text="{x:Static t:AppTexts.LoanNotFoundTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                        <Label Text="{x:Static t:AppTexts.LoanNotFoundBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoInstallments}">
+                    <VerticalStackLayout Spacing="4" Padding="0,8">
+                        <Label Text="{x:Static t:AppTexts.NoInstallmentTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                        <Label Text="{x:Static t:AppTexts.NoInstallmentBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Grid.Row="1" Text="Enregistrer un remboursement" Command="{Binding RecordCommand}"
+                IsVisible="{Binding CanRecord}" Style="{StaticResource PrimaryButton}" Margin="16,8,16,16" AutomationId="Schedule-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+    </Grid>
+</ContentPage>

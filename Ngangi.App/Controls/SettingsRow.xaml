@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Ligne de réglage : icône, titre, légende, puis pastille de texte (ex. « Bientôt ») ou chevron. Hauteur ≥ 56 dp.
+     Un Button transparent couvre la ligne (retour tactile, rôle « bouton »). -->
+<ContentView x:Class="Ngangi.App.Controls.SettingsRow"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Ngangi.App.Controls">
+    <Grid>
+        <Border Style="{StaticResource Card}" Padding="14,12" MinimumHeightRequest="56">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                <c:Icon x:Name="Glyph" Grid.Column="0" Tone="Ok" VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label x:Name="TitleLabel" Style="{StaticResource Name}" />
+                    <Label x:Name="CaptionLabel" Style="{StaticResource Caption}" IsVisible="False" />
+                </VerticalStackLayout>
+                <Border x:Name="BadgeBox" Grid.Column="2" Style="{StaticResource Badge}" IsVisible="False"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Tint}, Dark={StaticResource TintD}}">
+                    <Label x:Name="BadgeLabel" Style="{StaticResource BadgeText}"
+                           TextColor="{AppThemeBinding Light={StaticResource OkText}, Dark={StaticResource OkTextD}}" />
+                </Border>
+                <c:Icon x:Name="Chevron" Grid.Column="2" Kind="ChevronRight" Tone="Muted" VerticalOptions="Center" />
+            </Grid>
+        </Border>
+        <Button x:Name="Hit" BackgroundColor="{StaticResource Clear}" Padding="0" BorderWidth="0" CornerRadius="16" Clicked="OnClicked" />
+    </Grid>
+</ContentView>

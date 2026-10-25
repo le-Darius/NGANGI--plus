@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.ReportPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             ControlTemplate="{StaticResource MainTabTemplate}"
+             Title="Bilan" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,24,16,24" Spacing="14">
+            <Label Text="{Binding Title}" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+
+            <Border Style="{StaticResource Banner}">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8" RowDefinitions="Auto,Auto">
+                    <Label Text="{Binding Banner}" Style="{StaticResource BannerText}" FontSize="{StaticResource FontCaption}" VerticalOptions="Center" />
+                    <Switch Grid.Column="1" IsToggled="{Binding IsProjection}" />
+                    <Label Grid.Row="1" Grid.ColumnSpan="2" Text="Projection = prévisions des cotisations et intérêts ; désactivée = sommes réellement encaissées." Style="{StaticResource Caption}" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Hero}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Total à partager" Style="{StaticResource OnHero}" />
+                    <Label Text="{Binding Total}" Style="{StaticResource BigHero}" />
+                    <Label Text="{Binding Breakdown}" Style="{StaticResource OnHero}" FontSize="{StaticResource FontCaption}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasEmpty}">
+                <VerticalStackLayout Spacing="4" Padding="0,8">
+                    <Label Text="{Binding EmptyTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{Binding EmptyBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Part de chaque membre" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+            <CollectionView ItemsSource="{Binding Shares}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList" />
+
+            <Button Text="Partager le bilan" Command="{Binding ShareCommand}" Style="{StaticResource OutlineButton}" AutomationId="Report-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

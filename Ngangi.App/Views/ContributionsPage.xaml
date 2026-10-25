@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.ContributionsPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             ControlTemplate="{StaticResource MainTabTemplate}"
+             Title="Cotisations" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,24,16,24" Spacing="14">
+            <Label Text="Cotisations" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoSessions}">
+                <VerticalStackLayout Spacing="4" Padding="0,8">
+                    <Label Text="{x:Static t:AppTexts.NoSessionTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{x:Static t:AppTexts.NoSessionBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Field}" IsVisible="{Binding HasSessions}">
+                <Picker ItemsSource="{Binding SessionLabels}" SelectedIndex="{Binding SelectedIndex}" Title="Séance" AutomationId="Contributions-picker-1" />
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasSessions}">
+                <VerticalStackLayout Spacing="8">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}" Style="{StaticResource Caption}" />
+                            <Label Text="{Binding Summary}" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+                        </VerticalStackLayout>
+                        <Label Grid.Column="1" Text="{Binding PaidText}" Style="{StaticResource Eyebrow}" VerticalOptions="Center" />
+                    </Grid>
+                    <ProgressBar Progress="{Binding Progress}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <CollectionView ItemsSource="{Binding Rows}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList" />
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoRows}">
+                <VerticalStackLayout Spacing="4" Padding="0,8">
+                    <Label Text="{x:Static t:AppTexts.NoContributionTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{x:Static t:AppTexts.NoContributionBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

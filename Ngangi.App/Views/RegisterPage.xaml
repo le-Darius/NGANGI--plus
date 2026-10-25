@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.RegisterPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             xmlns:t="clr-namespace:Ngangi.App"
+             Title="Inscription" SafeAreaEdges="All">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="16,8,16,16" Spacing="16">
+                <Grid ColumnDefinitions="*,Auto">
+                    <c:IconButton Kind="Back" Command="{Binding BackCommand}" Description="{x:Static t:AppTexts.Back}" />
+                    <c:BrandLogo Grid.Column="1" Size="32" IsDecorative="True" VerticalOptions="Center" />
+                </Grid>
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Créer un compte" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Créez le compte du responsable de ce téléphone pour commencer." Style="{StaticResource Muted}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Nom complet" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Stroke="{Binding NameStroke}">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Entry Text="{Binding FullName}" Placeholder="Prénom et nom" AutomationId="Register-entry-1" />
+                            <Label Grid.Column="1" Text="✓" IsVisible="{Binding NameValid}" Style="{StaticResource Glyph}"
+                                   TextColor="{AppThemeBinding Light={StaticResource OkText}, Dark={StaticResource OkTextD}}" />
+                        </Grid>
+                    </Border>
+                    <Label Text="{Binding NameMessage}" IsVisible="{Binding HasNameMessage}" Style="{StaticResource ErrorText}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Numéro de téléphone" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Stroke="{Binding PhoneStroke}">
+                        <Entry Text="{Binding Phone}" Keyboard="Telephone" Placeholder="6 70 12 34 56" AutomationId="Register-entry-2" />
+                    </Border>
+                    <Label Text="{Binding PhoneMessage}" IsVisible="{Binding HasPhoneMessage}" Style="{StaticResource ErrorText}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Mot de passe" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Stroke="{Binding PasswordStroke}">
+                        <Entry Text="{Binding Password}" IsPassword="True" Placeholder="8 caractères minimum" AutomationId="Register-entry-3" />
+                    </Border>
+                    <Label Text="{Binding PasswordHint}" Style="{StaticResource ErrorText}" TextColor="{Binding PasswordHintColor}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Confirmer le mot de passe" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Stroke="{Binding ConfirmStroke}">
+                        <Entry Text="{Binding Confirm}" IsPassword="True" Placeholder="Saisissez-le à nouveau" AutomationId="Register-entry-4" />
+                    </Border>
+                    <Label Text="{Binding ConfirmMessage}" IsVisible="{Binding HasConfirmMessage}" Style="{StaticResource ErrorText}" />
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Spacing="8">
+                    <CheckBox IsChecked="{Binding Accepted}" VerticalOptions="Center" AutomationId="Register-checkbox-1" />
+                    <Label Text="J'accepte les conditions d'utilisation" VerticalOptions="Center" Style="{StaticResource Muted}" />
+                </HorizontalStackLayout>
+
+                <Label Text="{Binding Error}" IsVisible="{Binding HasError}" Style="{StaticResource ErrorText}" />
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="1" Padding="16,8,16,16" Spacing="10">
+            <Label Text="Corrigez les champs en rouge pour continuer." IsVisible="{Binding ShowFixHint}"
+                   Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+            <Button Text="Créer mon compte" Command="{Binding SubmitCommand}" Style="{StaticResource PrimaryButton}" AutomationId="Register-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+            <Button Text="Déjà inscrit ? Se connecter" Command="{Binding BackCommand}" Style="{StaticResource LinkButton}" AutomationId="Register-button-2" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

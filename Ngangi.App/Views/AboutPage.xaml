@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.AboutPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             Title="{x:Static t:AppTexts.AboutPageTitle}" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,8,16,24" Spacing="14">
+            <c:IconButton Kind="Back" Command="{Binding BackCommand}" Description="{x:Static t:AppTexts.Back}" />
+
+            <HorizontalStackLayout Spacing="12">
+                <c:BrandLogo Size="48" IsDecorative="True" VerticalOptions="Center" />
+                <VerticalStackLayout VerticalOptions="Center">
+                    <Label Text="{x:Static t:AppTexts.AppName}" Style="{StaticResource BrandTitle}" SemanticProperties.HeadingLevel="Level1" />
+                    <Label Text="{Binding Version}" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <Label Text="{x:Static t:AppTexts.AboutTagline}" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+            <Label Text="{x:Static t:AppTexts.AboutOffline}" Style="{StaticResource Muted}" />
+
+            <Label Text="{x:Static t:AppTexts.AboutLicensesSection}" Style="{StaticResource Eyebrow}" SemanticProperties.HeadingLevel="Level2" />
+            <Border Style="{StaticResource Card}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{x:Static t:AppTexts.AboutLicensesIntro}" Style="{StaticResource Muted}" />
+                    <Label Text="{x:Static t:AppTexts.AboutIconsName}" Style="{StaticResource Name}" />
+                    <Label Text="{x:Static t:AppTexts.AboutMauiName}" Style="{StaticResource Name}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="{x:Static t:AppTexts.AboutLicenseTextTitle}" Style="{StaticResource Eyebrow}" SemanticProperties.HeadingLevel="Level2" />
+            <Border Style="{StaticResource Card}">
+                <Label Text="{Binding LicenseText}" Style="{StaticResource Caption}" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

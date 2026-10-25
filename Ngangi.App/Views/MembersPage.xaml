@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.MembersPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App" ControlTemplate="{StaticResource MainTabTemplate}" Title="Membres" SafeAreaEdges="All">
+    <Grid Padding="16,20,16,12" RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="12">
+        <Grid ColumnDefinitions="*,Auto">
+            <Label Text="Membres" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+            <Label Grid.Column="1" Text="{Binding CountText}" Style="{StaticResource Caption}" VerticalOptions="Center" />
+        </Grid>
+        <Border Grid.Row="1" Style="{StaticResource Field}">
+            <Entry Text="{Binding Query}" Placeholder="Rechercher un membre" ReturnType="Search" ClearButtonVisibility="WhileEditing" AutomationId="Members-entry-1" />
+        </Border>
+        <Button Grid.Row="2" Text="Partager le résumé du groupe" Command="{Binding ShareSummaryCommand}" Style="{StaticResource SmallOutlineButton}" AutomationId="Members-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+        <Grid Grid.Row="3">
+            <CollectionView ItemsSource="{Binding Members}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList">
+                <CollectionView.EmptyView>
+                    <Border Style="{StaticResource Card}" Margin="0,8">
+                        <VerticalStackLayout Spacing="6" Padding="8">
+                            <Label Text="{Binding EmptyTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                            <Label Text="{Binding EmptyBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </Grid>
+        <Button Grid.Row="4" Text="+  Ajouter un membre" Style="{StaticResource PrimaryButton}" IsVisible="{Binding CanAdd}" Clicked="OnAddClicked" AutomationId="Members-button-2" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+    </Grid>
+</ContentPage>

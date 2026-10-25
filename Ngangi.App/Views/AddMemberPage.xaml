@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.AddMemberPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App" Title="Ajouter un membre" SafeAreaEdges="All">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="16,16,16,24" Spacing="20">
+                <Button Text="‹  Retour" Command="{Binding CancelCommand}" Style="{StaticResource LinkButton}" HorizontalOptions="Start" AutomationId="AddMember-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Nouveau membre" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Renseignez les informations du membre du njangi." Style="{StaticResource Muted}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Nom complet" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}"><Entry x:Name="NameEntry" Text="{Binding Name}" Placeholder="Prénom et nom" ReturnType="Next" AutomationId="AddMember-entry-1" /></Border>
+                    <Label Text="Saisissez le nom tel qu'il doit apparaître dans le groupe." Style="{StaticResource Caption}" />
+                    <Label Text="{Binding NameError}" IsVisible="{Binding HasNameError}" Style="{StaticResource ErrorText}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Téléphone" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}"><Entry Text="{Binding Phone}" Keyboard="Telephone" Placeholder="6 70 12 34 56" ReturnType="Done" AutomationId="AddMember-entry-2" /></Border>
+                    <Label Text="Numéro camerounais à 9 chiffres." Style="{StaticResource Caption}" />
+                    <Label Text="{Binding PhoneError}" IsVisible="{Binding HasPhoneError}" Style="{StaticResource ErrorText}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Rôle dans le groupe" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Padding="10,0"><Picker ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}" AutomationId="AddMember-picker-1" /></Border>
+                    <Label Text="L'attribution d'un rôle de responsabilité est réservée au président." Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+                <Label Text="{Binding Error}" IsVisible="{Binding HasError}" Style="{StaticResource ErrorText}" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="1" Padding="16,8,16,16" Spacing="8">
+            <Button Text="Ajouter le membre" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}" AutomationId="AddMember-button-2" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

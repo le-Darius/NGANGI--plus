@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Une option d'un choix unique (ex. thème). L'option choisie se reconnaît sans la couleur : trait épais, coche, texte en gras. -->
+<ContentView x:Class="Ngangi.App.Controls.ChoiceTile"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:c="clr-namespace:Ngangi.App.Controls">
+    <Grid>
+        <Border x:Name="Box" Style="{StaticResource ChoiceTile}">
+            <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                <c:Icon x:Name="Check" Kind="Check" Tone="Ok" Size="20" IsVisible="False" />
+                <Label x:Name="Caption" HorizontalTextAlignment="Center" LineBreakMode="TailTruncation" MaxLines="1" />
+            </VerticalStackLayout>
+        </Border>
+        <Button x:Name="Hit" BackgroundColor="{StaticResource Clear}" Padding="0" BorderWidth="0" CornerRadius="14" Clicked="OnClicked" />
+    </Grid>
+</ContentView>

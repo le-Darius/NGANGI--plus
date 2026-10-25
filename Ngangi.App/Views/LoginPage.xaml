@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             Title="Connexion" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,64,16,24" Spacing="20">
+            <VerticalStackLayout Spacing="6">
+                <HorizontalStackLayout Spacing="12">
+                    <c:BrandLogo Size="48" IsDecorative="True" VerticalOptions="Center" />
+                    <Label Text="{x:Static t:AppTexts.AppName}" Style="{StaticResource BrandTitle}" VerticalOptions="Center" SemanticProperties.HeadingLevel="Level2" />
+                </HorizontalStackLayout>
+                <Label Text="Content de vous revoir" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+                <Label Text="Connectez-vous pour gérer la caisse de prêts de votre njangi." Style="{StaticResource Muted}" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource TintBox}" IsVisible="{Binding IsFirstUse}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="{x:Static t:AppTexts.FirstUseTitle}" Style="{StaticResource Name}" />
+                    <Label Text="{x:Static t:AppTexts.FirstUseBody}" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Numéro de téléphone" Style="{StaticResource FieldLabel}" />
+                <Border Style="{StaticResource Field}">
+                    <Entry Text="{Binding Phone}" Keyboard="Telephone" Placeholder="6 70 12 34 56" AutomationId="Login-entry-1" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="8">
+                <Label Text="Mot de passe" Style="{StaticResource FieldLabel}" />
+                <Border Style="{StaticResource Field}">
+                    <Entry Text="{Binding Password}" IsPassword="True" Placeholder="Votre mot de passe" AutomationId="Login-entry-2" />
+                </Border>
+            </VerticalStackLayout>
+
+            <Label Text="{Binding Error}" IsVisible="{Binding HasError}" Style="{StaticResource ErrorText}" />
+
+            <Button Text="Se connecter" Command="{Binding LoginCommand}" Style="{StaticResource PrimaryButton}" AutomationId="Login-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+            <Button Text="Créer un compte" Command="{Binding RegisterCommand}" Style="{StaticResource OutlineButton}" AutomationId="Login-button-2" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+
+            <!-- Visible uniquement en Debug (voir LoginViewModel) : en Release, ce panneau est caché et vide -->
+            <VerticalStackLayout Spacing="2" Margin="0,16,0,0" IsVisible="{Binding ShowDebugPanel}">
+                <Label Text="{Binding DebugInfo}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                <Button Text="{Binding DebugResetText}" Command="{Binding ResetDemoCommand}" Style="{StaticResource LinkButton}" AutomationId="Login-button-3" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

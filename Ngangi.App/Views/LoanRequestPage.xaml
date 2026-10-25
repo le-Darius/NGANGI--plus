@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.LoanRequestPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             Title="Demande de prêt" SafeAreaEdges="All">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="16,8,16,16" Spacing="16">
+                <c:IconButton Kind="Back" Command="{Binding BackCommand}" Description="{x:Static t:AppTexts.Back}" />
+                <Label Text="Demande de prêt" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+
+                <Border Style="{StaticResource Banner}" IsVisible="{Binding HasNotice}">
+                    <Label Text="{Binding Notice}" Style="{StaticResource BannerText}" />
+                </Border>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Emprunteur" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}">
+                        <Picker ItemsSource="{Binding BorrowerNames}" SelectedIndex="{Binding BorrowerIndex}" IsEnabled="{Binding CanPickBorrower}" AutomationId="LoanRequest-picker-1" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Montant demandé (FCFA)" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}">
+                        <Entry Text="{Binding AmountText}" Keyboard="Numeric" Placeholder="Ex. 80000" AutomationId="LoanRequest-entry-1" />
+                    </Border>
+                    <Label Text="{Binding Hint}" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Durée" Style="{StaticResource FieldLabel}" />
+                    <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding Chips}" BindableLayout.ItemTemplate="{StaticResource ChipTemplate}" />
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Taux fixé par le groupe" Style="{StaticResource FieldLabel}" />
+                    <Border Style="{StaticResource Field}" Opacity="0.7">
+                        <Entry Text="{Binding RateText}" IsReadOnly="True" AutomationId="LoanRequest-entry-2" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <Border Style="{StaticResource Card}" StrokeThickness="2"
+                        Stroke="{AppThemeBinding Light={StaticResource Pri}, Dark={StaticResource PriD}}">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="10">
+                        <Label Grid.Row="0" Text="Capital" Style="{StaticResource Muted}" />
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Capital}" />
+                        <Label Grid.Row="1" Text="{Binding InterestLabel}" Style="{StaticResource Muted}" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Interest}" FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light={StaticResource OkText}, Dark={StaticResource OkTextD}}" />
+                        <Label Grid.Row="2" Text="Total à rembourser" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Total}" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+                        <Label Grid.Row="3" Text="Mensualité estimée" Style="{StaticResource Muted}" />
+                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Monthly}" FontAttributes="Bold" />
+                        <Label Grid.Row="4" Text="Première échéance prévue" Style="{StaticResource Muted}" />
+                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding FirstDue}" FontAttributes="Bold" />
+                    </Grid>
+                </Border>
+
+                <Label Text="{Binding Errors}" IsVisible="{Binding HasErrors}" Style="{StaticResource ErrorText}" />
+            </VerticalStackLayout>
+        </ScrollView>
+        <Button Grid.Row="1" Text="Envoyer la demande" Command="{Binding SubmitCommand}"
+                Style="{StaticResource PrimaryButton}" Margin="16,8,16,16" AutomationId="LoanRequest-button-1" SemanticProperties.Description="{Binding Source={RelativeSource Self}, Path=Text}" />
+    </Grid>
+</ContentPage>

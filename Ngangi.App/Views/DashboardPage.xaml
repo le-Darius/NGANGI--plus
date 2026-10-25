@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="Ngangi.App.Views.DashboardPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:t="clr-namespace:Ngangi.App"
+             xmlns:c="clr-namespace:Ngangi.App.Controls"
+             ControlTemplate="{StaticResource MainTabTemplate}"
+             Title="Accueil" SafeAreaEdges="All">
+    <ScrollView>
+        <VerticalStackLayout Padding="16,24,16,24" Spacing="14">
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <VerticalStackLayout Spacing="2">
+                    <Label Text="{Binding GroupName}" Style="{StaticResource Title}" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{Binding CycleLabel}" Style="{StaticResource Caption}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Spacing="0" HorizontalOptions="Center">
+                    <Grid WidthRequest="48" HeightRequest="48">
+                        <Border Style="{StaticResource Avatar}" HorizontalOptions="Center" AutomationProperties.IsInAccessibleTree="False">
+                            <Label Text="{Binding Initials}" Style="{StaticResource AvatarLabel}" />
+                        </Border>
+                        <Button Command="{Binding OpenProfileCommand}" BackgroundColor="{StaticResource Clear}" Padding="0" BorderWidth="0"
+                                CornerRadius="24" SemanticProperties.Description="{Binding ProfileDescription}" AutomationId="Dashboard-button-1" />
+                    </Grid>
+                    <Label Text="{x:Static t:AppTexts.ProfileShort}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center"
+                           AutomationProperties.IsInAccessibleTree="False" />
+                </VerticalStackLayout>
+            </Grid>
+
+            <Border Style="{StaticResource Hero}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Caisse disponible" Style="{StaticResource OnHero}" />
+                    <Label Text="{Binding Cash}" Style="{StaticResource BigHero}" LineBreakMode="WordWrap" />
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Border Grid.Column="0" Style="{StaticResource HeroTile}">
+                            <VerticalStackLayout>
+                                <Label Text="Prêts en cours" Style="{StaticResource OnHero}" FontSize="{StaticResource FontCaption}" />
+                                <Label Text="{Binding ActiveLoans}" Style="{StaticResource OnHeroBold}" />
+                            </VerticalStackLayout>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource HeroTile}">
+                            <VerticalStackLayout>
+                                <Label Text="Intérêts perçus" Style="{StaticResource OnHero}" FontSize="{StaticResource FontCaption}" />
+                                <Label Text="{Binding Interest}" Style="{StaticResource OnHeroBold}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Style="{StaticResource Banner}" IsVisible="{Binding HasFines}">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenFinesCommand}" />
+                </Border.GestureRecognizers>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="{Binding FinesTitle}" Style="{StaticResource BannerText}" FontAttributes="Bold" />
+                        <Label Text="{Binding FinesDetail}" Style="{StaticResource BannerText}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="1" Text="›" Style="{StaticResource BannerText}" FontSize="{StaticResource FontTitle}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Padding="14,12" IsVisible="{Binding HasNext}">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                    <Border Grid.Column="0" Style="{StaticResource TintBox}" WidthRequest="56" Padding="0,8">
+                        <VerticalStackLayout HorizontalOptions="Center">
+                            <Label Text="{Binding NextMonth}" Style="{StaticResource Eyebrow}" HorizontalTextAlignment="Center" />
+                            <Label Text="{Binding NextDay}" Style="{StaticResource Title}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                        </VerticalStackLayout>
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="Prochaine séance" Style="{StaticResource Eyebrow}" />
+                        <Label Text="{Binding NextTitle}" Style="{StaticResource Name}" />
+                        <Label Text="{Binding NextDetail}" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoNext}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="{x:Static t:AppTexts.NoSessionTitle}" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="{x:Static t:AppTexts.NoSessionBody}" Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <c:ShortcutTile Grid.Column="0" Kind="Contributions" Text="{x:Static t:AppTexts.ShortcutContributions}" Command="{Binding OpenContributionsCommand}" />
+                <c:ShortcutTile Grid.Column="1" Kind="Loans" Text="{x:Static t:AppTexts.ShortcutLoanRequest}" Command="{Binding OpenLoanRequestCommand}" />
+                <c:ShortcutTile Grid.Column="2" Kind="Fine" Text="{x:Static t:AppTexts.ShortcutFines}" Command="{Binding OpenFinesCommand}" />
+            </Grid>
+
+            <Label Text="Prêts en cours" Style="{StaticResource Sub}" SemanticProperties.HeadingLevel="Level2" />
+            <CollectionView ItemsSource="{Binding Loans}" ItemTemplate="{StaticResource RowTemplate}" SelectionMode="None" ItemsLayout="VerticalList" />
+            <Border Style="{StaticResource Card}" IsVisible="{Binding HasNoLoans}">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Aucun prêt en cours" Style="{StaticResource Sub}" HorizontalTextAlignment="Center" SemanticProperties.HeadingLevel="Level2" />
+                    <Label Text="Les prêts approuvés par le groupe apparaîtront ici." Style="{StaticResource Caption}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
